@@ -1,0 +1,98 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Tanks/Tank.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Tanks/EnemyTank.gd" type="Script" id=2]
+[ext_resource path="res://assets/onlyObjects_retina_rotated.png" type="Texture" id=3]
+[ext_resource path="res://UI/UnitDisplay.tscn" type="PackedScene" id=4]
+
+[sub_resource type="RectangleShape2D" id=1]
+
+custom_solver_bias = 0.0
+extents = Vector2( 39.9232, 34.2243 )
+
+[node name="EnemyTank" instance=ExtResource( 1 )]
+
+position = Vector2( 0, -0.15778 )
+collision_layer = 4
+collision_mask = 3
+script = ExtResource( 2 )
+_sections_unfolded = [ "Collision", "collision" ]
+gun_cooldown = 0.5
+turret_speed = null
+detect_radius = null
+
+[node name="Body" parent="." index="0"]
+
+texture = ExtResource( 3 )
+region_enabled = true
+region_rect = Rect2( 268, 186, 80, 76 )
+_sections_unfolded = [ "Region" ]
+
+[node name="CollisionShape2D" parent="." index="1"]
+
+shape = SubResource( 1 )
+
+[node name="Turret" parent="." index="2"]
+
+rotation = 0.00341513
+texture = ExtResource( 3 )
+offset = Vector2( 20, 0 )
+region_enabled = true
+region_rect = Rect2( 452, 34, 60, 24 )
+_sections_unfolded = [ "Offset", "Region" ]
+
+[node name="Muzzle" parent="Turret" index="0"]
+
+position = Vector2( 72.5481, 0.315631 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="Flash" parent="Turret" index="1"]
+
+position = Vector2( 55, 0 )
+texture = ExtResource( 3 )
+offset = Vector2( 25, 0 )
+region_rect = Rect2( 644, 94, 50, 40 )
+_sections_unfolded = [ "Offset", "Region", "Transform", "Visibility" ]
+
+[node name="DetectRadius" type="Area2D" parent="." index="4"]
+
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+collision_layer = 4
+collision_mask = 2
+audio_bus_override = false
+audio_bus_name = "Master"
+_sections_unfolded = [ "Collision" ]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectRadius" index="0"]
+
+[node name="LookAhead1" type="RayCast2D" parent="." index="5"]
+
+position = Vector2( 0, -30 )
+enabled = true
+exclude_parent = true
+cast_to = Vector2( 100, 0 )
+collision_mask = 7
+_sections_unfolded = [ "Transform" ]
+
+[node name="LookAhead2" type="RayCast2D" parent="." index="6"]
+
+position = Vector2( 0, 30 )
+enabled = true
+exclude_parent = true
+cast_to = Vector2( 100, 0 )
+collision_mask = 7
+_sections_unfolded = [ "Transform" ]
+
+[node name="UnitDisplay" parent="." index="7" instance=ExtResource( 4 )]
+
+[connection signal="health_changed" from="." to="UnitDisplay" method="update_healthbar"]
+
+[connection signal="body_entered" from="DetectRadius" to="." method="_on_DetectRadius_body_entered"]
+
+[connection signal="body_exited" from="DetectRadius" to="." method="_on_DetectRadius_body_exited"]
+
+

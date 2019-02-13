@@ -1,0 +1,84 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Tanks/Tank.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Tanks/Player.gd" type="Script" id=2]
+[ext_resource path="res://Bullets/PlayerBullet.tscn" type="PackedScene" id=3]
+[ext_resource path="res://assets/onlyObjects_retina_rotated.png" type="Texture" id=4]
+
+[sub_resource type="RectangleShape2D" id=1]
+
+custom_solver_bias = 0.0
+extents = Vector2( 39.0145, 34.4117 )
+
+[node name="Player" instance=ExtResource( 1 )]
+
+collision_layer = 2
+collision_mask = 5
+script = ExtResource( 2 )
+_sections_unfolded = [ "Collision" ]
+Bullet = ExtResource( 3 )
+max_speed = 200
+rotation_speed = 1.0
+gun_cooldown = 0.4
+max_health = 150
+gun_shots = 1
+gun_spread = 0.2
+
+[node name="Body" parent="." index="0"]
+
+texture = ExtResource( 4 )
+region_enabled = true
+region_rect = Rect2( 309, 263, 79, 82 )
+_sections_unfolded = [ "Offset", "Region" ]
+
+[node name="CollisionShape2D" parent="." index="1"]
+
+shape = SubResource( 1 )
+
+[node name="Turret" parent="." index="2"]
+
+texture = ExtResource( 4 )
+offset = Vector2( 20, 0 )
+region_enabled = true
+region_rect = Rect2( 684, 14, 60, 24 )
+_sections_unfolded = [ "Offset", "Region" ]
+
+[node name="Muzzle" parent="Turret" index="0"]
+
+position = Vector2( 69.2427, 0.440125 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="Flash" parent="Turret" index="1"]
+
+position = Vector2( 55, 0 )
+texture = ExtResource( 4 )
+offset = Vector2( 25, 0 )
+region_rect = Rect2( 584, 58, 60, 32 )
+_sections_unfolded = [ "Offset", "Region", "Transform", "Visibility" ]
+
+[node name="Camera2D" type="Camera2D" parent="." index="4"]
+
+anchor_mode = 1
+rotating = false
+current = true
+zoom = Vector2( 1.4, 1.4 )
+limit_left = -10000000
+limit_top = -10000000
+limit_right = 10000000
+limit_bottom = 10000000
+limit_smoothed = false
+drag_margin_h_enabled = true
+drag_margin_v_enabled = true
+smoothing_enabled = false
+smoothing_speed = 5.0
+offset_v = 0.0
+offset_h = 0.0
+drag_margin_left = 0.2
+drag_margin_top = 0.2
+drag_margin_right = 0.2
+drag_margin_bottom = 0.2
+editor_draw_screen = true
+editor_draw_limits = false
+editor_draw_drag_margin = false
+
+

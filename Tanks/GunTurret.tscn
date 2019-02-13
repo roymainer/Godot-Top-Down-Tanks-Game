@@ -1,0 +1,35 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Tanks/EnemyTank.tscn" type="PackedScene" id=1]
+
+[sub_resource type="CircleShape2D" id=1]
+
+custom_solver_bias = 0.0
+radius = 32.2525
+
+[node name="GunTurret" instance=ExtResource( 1 )]
+
+max_speed = 0
+rotation_speed = 0.0
+gun_cooldown = 0.2
+max_health = 50
+turret_speed = 1.6
+detect_radius = 300
+
+[node name="Body" parent="." index="0"]
+
+region_rect = Rect2( 532, 130, 56, 56 )
+
+[node name="CollisionShape2D" parent="." index="1"]
+
+shape = SubResource( 1 )
+
+[node name="Turret" parent="." index="2"]
+
+region_rect = Rect2( 271, 60, 64, 28 )
+
+[node name="Flash" parent="Turret" index="1"]
+
+region_rect = Rect2( 535, 18, 52, 16 )
+
+

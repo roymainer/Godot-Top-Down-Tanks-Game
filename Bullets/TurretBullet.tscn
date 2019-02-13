@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Bullets/EnemyBullet.tscn" type="PackedScene" id=1]
+
+[node name="TurretBullet" instance=ExtResource( 1 )]
+
+damage = 1
+lifetime = 0.3
+
+[node name="Sprite" parent="." index="0"]
+
+region_rect = Rect2( 573, 394, 20, 8 )
+
+[node name="CollisionShape2D" parent="." index="1"]
+
+_sections_unfolded = [ "Transform" ]
+
+
