@@ -13,7 +13,7 @@ export (int) var max_health
 export (int) var gun_shots = 1  # how many bullets we're gonna shoot
 export (float) var gun_spread = 0.2  # how spread are the shots
 export (int) var max_ammo = 20  # maximum shots available
-export (int) var ammo = -1 setget ammo  # -1 is unlimited ammo (for enemies)
+export (int) var ammo = -1 setget set_ammo  # -1 is unlimited ammo (for enemies)
 
 var velocity = Vector2()
 var can_shoot = true
@@ -23,13 +23,15 @@ var health
 func _ready():
 	health = max_health
 	emit_signal('health_changed', health * 100 / max_health)  # will emit the health percentage 
+	emit_signal("ammo_changed", ammo * 100 / max_ammo) 
 	$GunTimer.wait_time = gun_cooldown
 
 func control(delta):
         pass
 		
 func shoot(num, spread, target=null):
-	if can_shoot:
+	if can_shoot and ammo != 0:
+		self.ammo -= 1  # reduce ammo every shot, use self.ammo to call the set_ammo func instead of just changing the value
 		can_shoot = false
 		$GunTimer.start()
 		var dir = Vector2(1,0).rotated($Turret.global_rotation)
@@ -74,3 +76,9 @@ func _on_GunTimer_timeout():
 
 func _on_Explosion_animation_finished():
 	queue_free()
+
+func set_ammo(value):
+	if value > max_ammo:
+		value = max_ammo  # limit the value to max_value
+	ammo = value
+	emit_signal("ammo_changed", ammo * 100 / max_ammo) 
