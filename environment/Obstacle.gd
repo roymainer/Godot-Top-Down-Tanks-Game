@@ -41,7 +41,7 @@ export (Items) var type setget _update
 
 # Setting the type variable will trigger the _update() function, 
 # which sets the Region and creates a correctly sized collision rectangle:
-func _update(_type):
+func _update(_type = Items.barrelBlack_side):
 	type = _type
 	if !Engine.editor_hint: # if not in editor mode, meaning, if the obstacle _update is called in the game
 		yield(self, 'tree_entered') # wait for the node to be initialized first before looking for sprite

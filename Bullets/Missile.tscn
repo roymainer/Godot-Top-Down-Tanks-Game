@@ -1,70 +1,39 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Bullets/Bullet.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Missile.gd" type="Script" id=2]
 [ext_resource path="res://assets/onlyObjects_retina_rotated.png" type="Texture" id=3]
 [ext_resource path="res://assets/explosions/smokey_explosion.png" type="Texture" id=4]
 
-[sub_resource type="RectangleShape2D" id=4]
+[sub_resource type="RectangleShape2D" id=1]
 
-custom_solver_bias = 0.0
 extents = Vector2( 13.8833, 5.55833 )
 
-[sub_resource type="Curve" id=1]
+[sub_resource type="CanvasItemMaterial" id=5]
 
-min_value = 0.0
-max_value = 1.0
-bake_resolution = 100
-_data = [ Vector2( 0, 0.133382 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.5 ), 0.0, 0.0, 0, 0 ]
+particles_animation = true
+particles_anim_h_frames = 24
+particles_anim_v_frames = 1
+particles_anim_loop = false
 
-[sub_resource type="CurveTexture" id=2]
+[sub_resource type="Curve" id=2]
 
-flags = 4
-width = 2048
-curve = SubResource( 1 )
+_data = [ Vector2( 0, 0.2096 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.5 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="ParticlesMaterial" id=3]
+[sub_resource type="CurveTexture" id=3]
 
-render_priority = 0
-trail_divisor = 1
-emission_shape = 0
-flag_align_y = false
-flag_rotate_y = false
+curve = SubResource( 2 )
+
+[sub_resource type="ParticlesMaterial" id=4]
+
 flag_disable_z = true
-spread = 45.0
-flatness = 0.0
 gravity = Vector3( 0, 0, 0 )
-initial_velocity = 1.0
-initial_velocity_random = 0.0
-angular_velocity = 5.35555e+007
-angular_velocity_random = 0.0
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
-linear_accel = 0.0
-linear_accel_random = 0.0
-radial_accel = 0.0
-radial_accel_random = 0.0
-tangential_accel = 0.0
-tangential_accel_random = 0.0
-damping = 0.0
-damping_random = 0.0
-angle = 0.0
-angle_random = 0.0
-scale = 1.0
-scale_random = 0.0
-scale_curve = SubResource( 2 )
-color = Color( 1, 1, 1, 1 )
-hue_variation = 0.0
-hue_variation_random = 0.0
+scale_curve = SubResource( 3 )
 anim_speed = 1.0
-anim_speed_random = 0.0
-anim_offset = 0.0
-anim_offset_random = 0.0
-anim_loop = false
-_sections_unfolded = [ "Animation", "Gravity", "Scale" ]
 
 [node name="Missile" instance=ExtResource( 1 )]
-
 script = ExtResource( 2 )
 speed = 400
 damage = 15
@@ -72,39 +41,21 @@ lifetime = 1.0
 steer_force = 25.0
 
 [node name="Sprite" parent="." index="0"]
-
 rotation = 3.14159
 texture = ExtResource( 3 )
 region_enabled = true
 region_rect = Rect2( 584, 244, 36, 16 )
-_sections_unfolded = [ "Region", "Transform" ]
 
 [node name="CollisionShape2D" parent="." index="1"]
-
-shape = SubResource( 4 )
+shape = SubResource( 1 )
 
 [node name="Trail" type="Particles2D" parent="." index="4"]
-
 show_behind_parent = true
+material = SubResource( 5 )
 position = Vector2( -15, 0 )
-emitting = true
 amount = 30
 lifetime = 0.4
-one_shot = false
-preprocess = 0.0
-speed_scale = 1.0
-explosiveness = 0.0
-randomness = 0.0
-fixed_fps = 0
-fract_delta = true
-visibility_rect = Rect2( -100, -100, 200, 200 )
 local_coords = false
-draw_order = 0
-process_material = SubResource( 3 )
+process_material = SubResource( 4 )
 texture = ExtResource( 4 )
-normal_map = null
-h_frames = 24
-v_frames = 1
-_sections_unfolded = [ "Drawing", "Material", "Process Material", "Textures", "Time", "Transform", "Visibility" ]
-
 

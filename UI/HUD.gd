@@ -5,6 +5,12 @@ var bar_green = preload("res://assets/UI/barHorizontal_green_mid 200.png")
 var bar_yellow = preload("res://assets/UI/barHorizontal_yellow_mid 200.png")
 var bar_texture
 
+func update_ammo(value):
+	$Margin/Container/AmmoGauge/Tween.interpolate_property($Margin/Container/AmmoGauge, 
+	'value', $Margin/Container/AmmoGauge.value, value,
+	0.2, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	$Margin/Container/AmmoGauge/Tween.start()
+#	$Margin/Container/AmmoGauge.value = value
 
 func update_healthbar(value):
 	bar_texture = bar_green

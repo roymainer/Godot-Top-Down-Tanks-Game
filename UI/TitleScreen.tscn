@@ -1,0 +1,217 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://UI/TitleScreen.gd" type="Script" id=1]
+[ext_resource path="res://Terrain/terrain_tiles.tres" type="TileSet" id=2]
+[ext_resource path="res://environment/Obstacle.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Tanks/EnemyTank.tscn" type="PackedScene" id=4]
+[ext_resource path="res://assets/Xolonium-Regular.ttf" type="DynamicFontData" id=5]
+
+[sub_resource type="Animation" id=3]
+
+resource_name = "start"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Title:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, -200 ), Vector2( 0, 160 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Play:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.7, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, false, true ]
+}
+
+[sub_resource type="Curve2D" id=4]
+
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 417.223, -131.295, -3.01468, -69.3376, 3.01468, 69.3376, 415.716, 108.372, 0, 0, 0, 0, 361.451, 159.621, 66.3229, 3.01468, -66.3229, -3.01468, 144.395, 155.099, 0, 0, 0, 0, 93.145, 222.929, 1.50734, -85.9184, -1.50734, 85.9184, 94.6523, 420.391, 0, 0, 0, 0, 147.409, 483.699, -70.845, -1.50734, 70.845, 1.50734, 806.117, 479.177, 0, 0, 0, 0, 861.888, 522.89, 0, 0, 0, 0, 863.396, 697.741, 0, 0, 0, 0, 1098.54, 688.697, 0, 0, 0, 0, 1097.03, 479.177, 69.3376, 1.50734, -69.3376, -1.50734, 919.167, 477.67, 0, 0, 0, 0, 858.874, 435.464, 0, 0, 0, 0, 866.41, -123.759, 0, 0, 0, 0, 415.716, -131.295 )
+}
+
+[sub_resource type="DynamicFont" id=1]
+
+size = 86
+font_data = ExtResource( 5 )
+
+[sub_resource type="DynamicFont" id=2]
+
+size = 48
+font_data = ExtResource( 5 )
+
+[node name="TitleScreen" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+
+[node name="TileMap" type="TileMap" parent="."]
+modulate = Color( 0.670588, 0.670588, 0.670588, 1 )
+scale = Vector2( 0.5, 0.5 )
+tile_set = ExtResource( 2 )
+cell_size = Vector2( 128, 128 )
+format = 1
+tile_data = PoolIntArray( 0, 10, 0, 1, 10, 0, 2, 0, 0, 3, 0, 0, 4, 0, 0, 5, 0, 0, 6, 1, 0, 7, 0, 0, 8, 0, 0, 9, 0, 0, 10, 0, 0, 11, 0, 0, 12, 0, 0, 13, 1, 0, 14, 0, 0, 15, 10, 0, 65536, 0, 0, 65537, 10, 0, 65538, 0, 0, 65539, 0, 0, 65540, 0, 0, 65541, 0, 0, 65542, 1, 0, 65543, 0, 0, 65544, 0, 0, 65545, 0, 0, 65546, 10, 0, 65547, 0, 0, 65548, 0, 0, 65549, 1, 0, 65550, 0, 0, 65551, 0, 0, 131072, 0, 0, 131073, 13, 0, 131074, 2, 0, 131075, 2, 0, 131076, 2, 0, 131077, 2, 0, 131078, 16, 0, 131079, 0, 0, 131080, 0, 0, 131081, 10, 0, 131082, 10, 0, 131083, 0, 0, 131084, 0, 0, 131085, 3, 0, 131086, 2, 0, 131087, 2, 0, 196608, 0, 0, 196609, 1, 0, 196610, 0, 0, 196611, 0, 0, 196612, 10, 0, 196613, 0, 0, 196614, 0, 0, 196615, 0, 0, 196616, 0, 0, 196617, 0, 0, 196618, 0, 0, 196619, 0, 0, 196620, 10, 0, 196621, 1, 0, 196622, 0, 0, 196623, 0, 0, 262144, 18, 0, 262145, 19, 0, 262146, 18, 0, 262147, 18, 0, 262148, 18, 0, 262149, 18, 0, 262150, 18, 0, 262151, 18, 0, 262152, 18, 0, 262153, 18, 0, 262154, 18, 0, 262155, 18, 0, 262156, 18, 0, 262157, 38, 0, 262158, 18, 0, 262159, 18, 0, 262160, 18, 0, 327680, 20, 0, 327681, 21, 0, 327682, 20, 0, 327683, 20, 0, 327684, 20, 0, 327685, 20, 0, 327686, 20, 0, 327687, 20, 0, 327688, 20, 0, 327689, 20, 0, 327690, 20, 0, 327691, 20, 0, 327692, 20, 0, 327693, 21, 0, 327694, 20, 0, 327695, 20, 0, 327696, 20, 0, 393216, 20, 0, 393217, 21, 0, 393218, 20, 0, 393219, 20, 0, 393220, 20, 0, 393221, 20, 0, 393222, 20, 0, 393223, 20, 0, 393224, 20, 0, 393225, 20, 0, 393226, 20, 0, 393227, 20, 0, 393228, 20, 0, 393229, 21, 0, 393230, 20, 0, 393231, 20, 0, 458752, 20, 0, 458753, 23, 0, 458754, 22, 0, 458755, 22, 0, 458756, 22, 0, 458757, 22, 0, 458758, 22, 0, 458759, 22, 0, 458760, 22, 0, 458761, 22, 0, 458762, 22, 0, 458763, 22, 0, 458764, 22, 0, 458765, 31, 0, 458766, 22, 0, 458767, 22, 0, 524288, 20, 0, 524289, 21, 0, 524290, 20, 0, 524291, 20, 0, 524292, 20, 0, 524293, 20, 0, 524294, 20, 0, 524295, 20, 0, 524296, 20, 0, 524297, 20, 0, 524298, 20, 0, 524299, 20, 0, 524300, 20, 0, 524301, 21, 0, 524302, 20, 0, 524303, 20, 0, 589824, 20, 0, 589825, 21, 0, 589826, 20, 0, 589827, 20, 0, 589828, 20, 0, 589829, 20, 0, 589830, 20, 0, 589831, 20, 0, 589832, 20, 0, 589833, 20, 0, 589834, 20, 0, 589835, 20, 0, 589836, 20, 0, 589837, 21, 0, 589838, 20, 0, 589839, 20, 0 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "start"
+anims/start = SubResource( 3 )
+
+[node name="Obstacles" type="Node2D" parent="."]
+editor/display_folded = true
+
+[node name="Obstacle2" parent="Obstacles" instance=ExtResource( 3 )]
+position = Vector2( 179.373, 400.952 )
+rotation = 0.419739
+type = 17
+
+[node name="Obstacle3" parent="Obstacles" instance=ExtResource( 3 )]
+position = Vector2( 976.756, 590.877 )
+rotation = 0.419739
+type = 17
+
+[node name="Obstacle4" parent="Obstacles" instance=ExtResource( 3 )]
+position = Vector2( 920.985, 162.793 )
+rotation = 0.419739
+scale = Vector2( 0.6, 0.6 )
+type = 11
+
+[node name="Obstacle5" parent="Obstacles" instance=ExtResource( 3 )]
+position = Vector2( 91.9478, 535.106 )
+rotation = 2.16802
+scale = Vector2( 0.6, 0.6 )
+type = 11
+
+[node name="Obstacle" parent="Obstacles" instance=ExtResource( 3 )]
+position = Vector2( -12.0587, 441.65 )
+rotation = -0.281808
+type = 16
+
+[node name="Obstacle9" parent="Obstacles" instance=ExtResource( 3 )]
+position = Vector2( 706.942, 46.7275 )
+rotation = -0.918561
+scale = Vector2( 1, 1 )
+type = 19
+
+[node name="Obstacle6" parent="Obstacles" instance=ExtResource( 3 )]
+position = Vector2( 768.743, 12.0587 )
+rotation = 0.157711
+type = 18
+
+[node name="Obstacle8" parent="Obstacles" instance=ExtResource( 3 )]
+position = Vector2( 339.151, 78.3817 )
+rotation = 0.254759
+scale = Vector2( 1, 1 )
+type = 19
+
+[node name="Obstacle10" parent="Obstacles" instance=ExtResource( 3 )]
+position = Vector2( 1023.48, 227.608 )
+rotation = -0.918561
+scale = Vector2( 1, 1 )
+type = 19
+
+[node name="Obstacle7" parent="Obstacles" instance=ExtResource( 3 )]
+position = Vector2( 4.52203, 10.5514 )
+rotation = -0.686501
+type = 18
+
+[node name="Obstacle11" parent="Obstacles" instance=ExtResource( 3 )]
+position = Vector2( 795.875, 535.106 )
+rotation = -3.44701
+scale = Vector2( 0.7, 0.7 )
+type = 4
+
+[node name="Obstacle12" parent="Obstacles" instance=ExtResource( 3 )]
+position = Vector2( 725.031, 538.12 )
+rotation = -0.686501
+scale = Vector2( 0.7, 0.7 )
+type = 5
+
+[node name="Obstacle13" parent="Obstacles" instance=ExtResource( 3 )]
+position = Vector2( 809.442, 578.818 )
+rotation = -0.686501
+scale = Vector2( 0.7, 0.7 )
+type = 5
+
+[node name="Obstacle14" parent="Obstacles" instance=ExtResource( 3 )]
+position = Vector2( 280.365, 607.458 )
+rotation = -0.686501
+scale = Vector2( 0.7, 0.7 )
+type = 8
+
+[node name="Obstacle15" parent="Obstacles" instance=ExtResource( 3 )]
+position = Vector2( 384.372, 565.252 )
+rotation = -0.686501
+scale = Vector2( 0.7, 0.7 )
+type = 8
+
+[node name="Obstacle16" parent="Obstacles" instance=ExtResource( 3 )]
+position = Vector2( 801.905, 325.585 )
+rotation = -0.686501
+scale = Vector2( 0.7, 0.7 )
+type = 8
+
+[node name="Obstacle17" parent="Obstacles" instance=ExtResource( 3 )]
+position = Vector2( 7.53687, 192.939 )
+rotation = -0.686501
+scale = Vector2( 0.7, 0.7 )
+type = 8
+
+[node name="Path2D" type="Path2D" parent="."]
+curve = SubResource( 4 )
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
+position = Vector2( 417.223, -131.295 )
+rotation = 1.5964
+
+[node name="EnemyTank" parent="Path2D/PathFollow2D" instance=ExtResource( 4 )]
+position = Vector2( 414.518, -89.0908 )
+scale = Vector2( 0.5, 0.5 )
+max_speed = 150
+rotation_speed = 50.0
+max_health = 100
+turret_speed = 150.0
+detect_radius = 500
+
+[node name="Title" type="Label" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -512.0
+margin_top = -170.0
+margin_right = 512.0
+margin_bottom = -65.9998
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 3
+custom_constants/shadow_offset_y = 3
+text = "Tank Battle"
+align = 1
+
+[node name="Play" type="Label" parent="."]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -512.0
+margin_top = -240.361
+margin_right = 512.0
+margin_bottom = -136.361
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 3
+custom_constants/shadow_offset_y = 3
+text = "Press space to play"
+align = 1
+

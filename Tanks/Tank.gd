@@ -14,14 +14,17 @@ export (int) var gun_shots = 1  # how many bullets we're gonna shoot
 export (float) var gun_spread = 0.2  # how spread are the shots
 export (int) var max_ammo = 20  # maximum shots available
 export (int) var ammo = -1 setget set_ammo  # -1 is unlimited ammo (for enemies)
+export (float) var offroad_friction 
 
 var velocity = Vector2()
 var can_shoot = true
 var alive = true
 var health
+var map
 
 func _ready():
 	health = max_health
+	$Smoke.emitting = false
 	emit_signal('health_changed', health * 100 / max_health)  # will emit the health percentage 
 	emit_signal("ammo_changed", ammo * 100 / max_ammo) 
 	$GunTimer.wait_time = gun_cooldown
@@ -44,19 +47,27 @@ func shoot(num, spread, target=null):
 		$AnimationPlayer.play("muzzle_flash")
 
 func _physics_process(delta):
-        if not alive:
-                return
-        control(delta)
-        move_and_slide(velocity)
+		if not alive:
+				 return
+		control(delta)
+		if map:
+			var tile = map.get_cellv(map.world_to_map(position))
+			if tile in GLOBALS.slow_terrain:
+				velocity *= float(offroad_friction)
+		move_and_slide(velocity)
 		
 func heal(amount):
 	health += amount
 	health = clamp(health, 0, max_health)
 	emit_signal('health_changed', health * 100 / max_health)  # percent health
+	if health >= max_health/2:
+		$Smoke.emitting = false
 	
 func take_damage(amount):
 	health -= amount
 	emit_signal('health_changed', health * 100 / max_health)
+	if health <= max_health/2:
+		$Smoke.emitting = true
 	if health <= 0:
 		explode()
 		

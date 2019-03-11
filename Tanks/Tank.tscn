@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Tanks/Tank.gd" type="Script" id=1]
 [ext_resource path="res://Effects/Explosion.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Effects/Smoke.tscn" type="PackedScene" id=3]
 
 [sub_resource type="Animation" id=1]
 
@@ -51,6 +52,7 @@ tracks/1/keys = {
 
 [node name="Tank" type="KinematicBody2D"]
 script = ExtResource( 1 )
+offroad_friction = 0.75
 
 [node name="Body" type="Sprite" parent="."]
 
@@ -72,6 +74,10 @@ anims/muzzle_flash = SubResource( 2 )
 
 [node name="Explosion" parent="." instance=ExtResource( 2 )]
 visible = false
+
+[node name="Smoke" parent="." instance=ExtResource( 3 )]
+position = Vector2( -40, 0 )
+rotation = 3.14159
 
 [connection signal="timeout" from="GunTimer" to="." method="_on_GunTimer_timeout"]
 [connection signal="animation_finished" from="Explosion" to="." method="_on_Explosion_animation_finished"]
